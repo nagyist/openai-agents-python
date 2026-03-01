@@ -54,6 +54,8 @@ If you enable the OpenAI Responses websocket transport, you can keep using the n
 
 This is the Responses API over websocket transport, not the [Realtime API](realtime/guide.md).
 
+For transport-selection rules and caveats around concrete model objects or custom providers, see [Models](models/index.md#responses-websocket-transport).
+
 ##### Pattern 1: No session helper (works)
 
 Use this when you just want websocket transport and do not need the SDK to manage a shared provider/session for you.
