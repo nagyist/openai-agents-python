@@ -15,9 +15,7 @@ from typing import (
     ClassVar,
     Literal,
     TypedDict,
-    TypeGuard,
     cast,
-    get_args,
     overload,
 )
 
@@ -98,9 +96,6 @@ _HEADERS = {"User-Agent": _USER_AGENT}
 _HEADERS_OVERRIDE: ContextVar[dict[str, str] | None] = ContextVar(
     "openai_responses_headers_override", default=None
 )
-_RESPONSE_INCLUDABLE_VALUES = frozenset(
-    value for value in get_args(ResponseIncludable) if isinstance(value, str)
-)
 
 
 class _NamespaceToolParam(TypedDict):
@@ -140,10 +135,6 @@ def _require_responses_tool_param(value: object) -> ResponsesToolParam:
         raise TypeError(f"Invalid Responses tool param payload: {value!r}")
 
     return cast(ResponsesToolParam, value)
-
-
-def _is_response_includable(value: object) -> TypeGuard[ResponseIncludable]:
-    return isinstance(value, str) and value in _RESPONSE_INCLUDABLE_VALUES
 
 
 def _coerce_response_includables(values: Sequence[str]) -> list[ResponseIncludable]:
